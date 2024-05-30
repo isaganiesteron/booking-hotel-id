@@ -15,8 +15,8 @@ export async function POST(request: Request) {
         platform: 'desktop',
       },
     };
-    // const hotelData = await fetchApiV2('/accommodations/availability', requestBody);
-    const hotelData = await fetchApi('/accommodations/search', requestBody);
+    const hotelData = await fetchApiV2('/accommodations/availability', requestBody);
+    // const hotelData = await fetchApi('/accommodations/search', requestBody);
     const data = accommodations.map((accommodation: number) => {
       const currentAccommodation = hotelData.data.find((hotel: any) => hotel.id === accommodation);
       const result = currentAccommodation

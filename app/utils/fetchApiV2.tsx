@@ -1,14 +1,15 @@
 const apiCall = async (endpoint: string, fetchBody: object) => {
   let data: any[] = [];
 
-  const token = `Basic ${process.env.BOOKING_API_KEY}`;
+  const token = `Bearer ${process.env.BOOKING_API_KEY}`;
   let next_page = '';
 
   /**
-   * servers:
-   * https://demandapi-sandbox.booking.com/3.1/
-   * https://demandapi.booking.com/3.1/
+   * ```http
+   * GET /v2.10/roomAvailability?hotel_id=456&checkin_date=2024-06-01&checkout_date=2024-06-07
+   * ```
    */
+  const url = 'https://api.booking.com/v2.10/roomAvailability';
 
   console.log(endpoint);
   console.log(fetchBody);
@@ -18,9 +19,8 @@ const apiCall = async (endpoint: string, fetchBody: object) => {
     checkout: string;
   };
 
-  const requestURL = `https://distribution-xml.booking.com/2.10/accommodations/availability?city_ids=-2140479&checkin=2024-06-01&checkout=2024-06-05&room1=A,A&guest_country=US`;
-  // const requestURL = `https://distribution-xml.booking.com/2.10${endpoint}?accommodation=${accommodations[0]}&checkin=${checkin}checkout=${checkout}&room1=A,A&guest_country=US`;
-  console.log(requestURL);
+  const requestURL = `${url}?hotel_id=1376973&checkin_date=2024-05-30&checkout_date=2024-05-31`;
+  console.log('requestURL', requestURL);
 
   const response = await fetch(requestURL, {
     headers: {

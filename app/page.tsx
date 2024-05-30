@@ -10,6 +10,7 @@ import { createCsvWriter } from './utils/writeToCsv';
 import chunkArray from './utils/chunkArray';
 import getTimestamp from './utils/getTimestamp';
 import eta from './utils/eta';
+import hotelAvailability from './utils/hotelAvailability';
 
 export default function Home() {
   const [tempAllLinks, setTempAllLinks] = useState<string[]>([]);
@@ -230,8 +231,6 @@ export default function Home() {
               body: postBody.replace(/\s+/g, ''),
             });
             const data = await result.json();
-
-            console.log(data);
             setPostResult(data);
           }}
         >
