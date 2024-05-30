@@ -16,6 +16,9 @@
 # production
 /build
 
+# generate csv files
+/csv
+
 # misc
 .DS_Store
 *.pem
