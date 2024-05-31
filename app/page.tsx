@@ -29,7 +29,7 @@ export default function Home() {
   const [postBody, setPostBody] = useState<string>(
     JSON.stringify(
       {
-        accommodations: [1376973],
+        accommodation: 1376973,
         checkin: moment().format('YYYY-MM-DD'),
         checkout: moment().add(1, 'days').format('YYYY-MM-DD'),
         guests: {
@@ -231,16 +231,17 @@ export default function Home() {
               body: postBody.replace(/\s+/g, ''),
             });
             const data = await result.json();
+            console.log(data);
             setPostResult(data);
           }}
         >
           Test POST endpoint
         </button>
-        {postResult &&
-          postResult.length > 0 &&
-          postResult.map((x: any, i: number) => (
-            <p key={`p_${i}`}>{`${x.id} => ${JSON.stringify(x.price)}`}</p>
-          ))}
+        {postResult && (
+          <p>{`${postResult['id' as keyof typeof postResult]} => ${JSON.stringify(
+            postResult['price' as keyof typeof postResult]
+          )}`}</p>
+        )}
       </div>
       {/**
        * Temporary interface for POST endpoint
