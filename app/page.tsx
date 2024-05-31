@@ -237,10 +237,19 @@ export default function Home() {
         >
           Test POST endpoint
         </button>
-        {postResult && (
-          <p>{`${postResult['id' as keyof typeof postResult]} => ${JSON.stringify(
-            postResult['price' as keyof typeof postResult]
-          )}`}</p>
+        {postResult && postResult['available' as keyof typeof postResult] && (
+          <>
+            <p>{`Hotel is available on chosen dates. => ${JSON.stringify(
+              postResult['price' as keyof typeof postResult]
+            )}`}</p>
+          </>
+        )}
+        {postResult && !postResult['available' as keyof typeof postResult] && (
+          <>
+            <p>{`Hotel is NOT available on chosen dates. => ${JSON.stringify(
+              postResult['alternative' as keyof typeof postResult]
+            )}`}</p>
+          </>
         )}
       </div>
       {/**

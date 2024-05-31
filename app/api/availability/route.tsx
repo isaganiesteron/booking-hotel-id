@@ -23,14 +23,6 @@ export async function POST(request: Request) {
 
     if (hotelData.data.length === 0) {
       // current hotel is NOT available
-      /**
-       * search for alternatives
-       * - Look other hotels within 500m that is available
-       * - within +/- 25% of price
-       * - within +/- 1 of score
-       * If not available get get accommodation/details to get the location
-       * then use that location to look for other hotels
-       */
 
       // get the location of current hotel
       const hotelLocation = await fetchApi('/accommodations/details', {
@@ -78,7 +70,7 @@ export async function POST(request: Request) {
       return NextResponse.json({
         id: accommodation,
         available: false,
-        alternative: sortedByScoreNearbyHotels,
+        alternative: sortedByScoreNearbyHotels.slice(0, 5), // will only return top 5 results
       });
     } else {
       // current hotel is available
